@@ -5,65 +5,72 @@ import java.util.Iterator;
 import java.util.List;
 
 
-public class FMClass extends FMType {	
-	
+public class FMClass extends FMType {
+
 	private String visibility;
-	
 
 	//Class properties
 	private List<FMProperty> FMProperties = new ArrayList<FMProperty>();
-	
-	//list of packages (for import declarations) 
 	private List<String> importedPackages = new ArrayList<String>();
-	
-	/** @ToDo: add list of methods */
-	
-	
+	private List<FMLinkedProperty> FMLinkedProperty = new ArrayList<>();
+
 	public FMClass(String name, String classPackage, String visibility) {
-		super(name, classPackage);		
+		super(name, classPackage);
 		this.visibility = visibility;
-	}	
-	
-	public List<FMProperty> getProperties(){
+	}
+
+	public List<myplugin.generator.fmmodel.FMLinkedProperty> getFMLinkedProperty() {
+		return FMLinkedProperty;
+	}
+
+	public void setFMLinkedProperty(List<myplugin.generator.fmmodel.FMLinkedProperty> FMLinkedProperty) {
+		this.FMLinkedProperty = FMLinkedProperty;
+	}
+
+
+	public List<FMProperty> getProperties() {
 		return FMProperties;
 	}
-	
-	public Iterator<FMProperty> getPropertyIterator(){
+
+	public Iterator<FMProperty> getPropertyIterator() {
 		return FMProperties.iterator();
 	}
-	
-	public void addProperty(FMProperty property){
-		FMProperties.add(property);		
+
+	public void addProperty(FMProperty property) {
+		FMProperties.add(property);
 	}
-	
-	public int getPropertyCount(){
+
+	public void addLinkedProperty(FMLinkedProperty property) {
+		FMLinkedProperty.add(property);
+	}
+
+	public int getPropertyCount() {
 		return FMProperties.size();
 	}
-	
-	public List<String> getImportedPackages(){
+
+	public List<String> getImportedPackages() {
 		return importedPackages;
 	}
 
-	public Iterator<String> getImportedIterator(){
+	public Iterator<String> getImportedIterator() {
 		return importedPackages.iterator();
 	}
-	
-	public void addImportedPackage(String importedPackage){
-		importedPackages.add(importedPackage);		
+
+	public void addImportedPackage(String importedPackage) {
+		importedPackages.add(importedPackage);
 	}
-	
-	public int getImportedCount(){
+
+	public int getImportedCount() {
 		return FMProperties.size();
 	}
-	
+
 	public String getVisibility() {
 		return visibility;
 	}
 
 	public void setVisibility(String visibility) {
 		this.visibility = visibility;
-	}	
+	}
 
-	
-	
+
 }

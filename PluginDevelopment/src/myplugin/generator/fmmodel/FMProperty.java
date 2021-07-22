@@ -1,43 +1,90 @@
 package myplugin.generator.fmmodel;
 
-
-public class FMProperty extends FMElement  {
+public class FMProperty extends FMElement {
 	//Property type
 	private String type;
 	// Property visibility (public, private, protected, package)
 	private String visibility;
 	//Multiplicity (lower value)
 	private Integer lower;
-	//Multiplicity (upper value) 
+	//Multiplicity (upper value)
 	private Integer upper;
-	
-	/** @ToDo: Add length, precision, unique... whatever is needed for ejb class generation
-	 * Also, provide these meta-attributes or tags in the modeling languange metaclass or 
-	 * stereotype */
+	private String columnName;
+	private Integer length;
+	private Boolean unique;
+	private Integer precision;
+	private Boolean display;
 
-	
-	public FMProperty(String name, String type, String visibility, int lower, int upper) {
+
+	/**
+	 * @ToDo: Add length, precision, unique... whatever is needed for ejb class generation
+	 * Also, provide these meta-attributes or tags in the modeling languange metaclass or
+	 * stereotype
+	 */
+	public FMProperty(String name, String type, String visibility, String columnName, Integer length, Boolean unique, Integer precision, int lower, int upper) {
 		super(name);
-		this.type = type;
+		if (type.equals("date")) {
+			this.type = "LocalDate";
+		} else {
+			this.type = type;
+		}
 		this.visibility = visibility;
-		
 		this.lower = lower;
-		this.upper = upper;		
+		this.upper = upper;
+		this.columnName = columnName;
+		this.precision = precision;
+		this.length = length;
+		this.unique = unique;
 	}
-	
+
+	public String getColumnName() {
+		return columnName;
+	}
+
+	public void setColumnName(String columnName) {
+		this.columnName = columnName;
+	}
+
+	public Integer getLength() {
+		return length;
+	}
+
+	public void setLength(Integer length) {
+		this.length = length;
+	}
+
+	public Boolean getUnique() {
+		return unique;
+	}
+
+	public void setUnique(Boolean unique) {
+		this.unique = unique;
+	}
+
+	public Integer getPrecision() {
+		return precision;
+	}
+
+	public void setPrecision(Integer precision) {
+		this.precision = precision;
+	}
+
 	public String getType() {
 		return type;
 	}
+
 	public void setType(String type) {
 		this.type = type;
 	}
+
 	public String getVisibility() {
 		return visibility;
 	}
+
 	public void setVisibility(String visibility) {
 		this.visibility = visibility;
 	}
-	
+
 	public Integer getLower() {
 		return lower;
 	}
@@ -52,5 +99,13 @@ public class FMProperty extends FMElement  {
 
 	public void setUpper(Integer upper) {
 		this.upper = upper;
+	}
+
+	public Boolean getDisplay() {
+		return display;
+	}
+
+	public void setDisplay(Boolean display) {
+		this.display = display;
 	}
 }
