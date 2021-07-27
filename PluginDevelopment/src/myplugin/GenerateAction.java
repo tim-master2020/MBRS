@@ -6,6 +6,10 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -38,21 +42,32 @@ class GenerateAction extends MDAction{
 		Package root = Application.getInstance().getProject().getModel();
 		
 		if (root == null) return;
-	
-		ModelAnalyzer analyzer = new ModelAnalyzer(root, "ejb");	
+
+		HashMap<ModelAnalyzer, String> analyzers = new HashMap<>();
+
+		analyzers.put(createAnalyzer(root, "demo.src.main.java.com.example.demo.generated.models"), "EJBGenerator");
+		analyzers.put(createAnalyzer(root, "demo.src.main.java.com.example.demo.user.repositories"), "EJBRepositoryGenerator");
+		analyzers.put(createAnalyzer(root, "demo.src.main.java.com.example.demo.generated.repositories"), "EJBRepositoryGenerator");
 		
 		try {
-			analyzer.prepareModel();	
-			GeneratorOptions go = ProjectOptions.getProjectOptions().getGeneratorOptions().get("EJBGenerator");			
-			EJBGenerator generator = new EJBGenerator(go);
-			generator.generate();
+			for (Map.Entry<ModelAnalyzer, String> analyzer: analyzers.entrySet()) {
+				analyzer.getKey().prepareModel();
+				GeneratorOptions go = ProjectOptions.getProjectOptions().getGeneratorOptions().get(analyzer.getValue());
+				EJBGenerator generator = new EJBGenerator(go);
+				generator.generate();
+			}
+
 			/**  @ToDo: Also call other generators */ 
-			JOptionPane.showMessageDialog(null, "Code is successfully generated! Generated code is in folder: " + go.getOutputPath() +
-					                         ", package: " + go.getFilePackage());
+			JOptionPane.showMessageDialog(null, "Code is successfully generated!");
 			exportToXml();
 		} catch (AnalyzeException e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());
 		} 			
+	}
+
+	private ModelAnalyzer createAnalyzer(Package root, String filePackage){
+		ModelAnalyzer analyzer = new ModelAnalyzer(root, filePackage);
+		return analyzer;
 	}
 	
 	private void exportToXml() {

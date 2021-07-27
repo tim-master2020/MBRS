@@ -108,7 +108,7 @@ public ${class.name}() {}
         <#lt>><#rt>
     </#if>
     <#lt> ${linkedP.name}) {
-    this.${linkedP.name} = ${property.name};
+    this.${linkedP.name} = ${linkedP.name};
     }
 </#list>
 

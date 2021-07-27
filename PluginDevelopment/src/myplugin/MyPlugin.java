@@ -29,9 +29,15 @@ public class MyPlugin extends com.nomagic.magicdraw.plugins.Plugin {
 		 * ProjectOptions.xml and take ejb generator options */
 		
 		//for test purpose only:
-		GeneratorOptions ejbOptions = new GeneratorOptions("c:/temp", "ejbclass", "templates", "{0}.java", true, "ejb"); 				
-		ProjectOptions.getProjectOptions().getGeneratorOptions().put("EJBGenerator", ejbOptions);
-				
+		generateOptions("ejbclass", "{0}.java", "demo.src.main.java.com.example.demo.generated.models", "EJBGenerator");
+		generateOptions("repositoryBase", "{0}BaseRepository.java", "demo.src.main.java.com.example.demo.user.repositories", "EJBRepositoryGenerator");
+		generateOptions("ejbclass", "{0}Repository.java", "demo.src.main.java.com.example.demo.generated.repositories", "EJBBaseRepositoryGenerator");
+	}
+
+	private void generateOptions(String templateName, String outputFilename, String filePackage, String k) {
+
+		GeneratorOptions ejbOptions = new GeneratorOptions("c:/temp", templateName, "templates", outputFilename, true, filePackage);
+		ProjectOptions.getProjectOptions().getGeneratorOptions().put(k, ejbOptions);
 		ejbOptions.setTemplateDir(pluginDir + File.separator + ejbOptions.getTemplateDir()); //apsolutna putanja
 	}
 
