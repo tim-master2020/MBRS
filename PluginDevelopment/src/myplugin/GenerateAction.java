@@ -43,17 +43,12 @@ class GenerateAction extends MDAction{
 		
 		if (root == null) return;
 
-		HashMap<ModelAnalyzer, String> analyzers = new HashMap<>();
-
-		analyzers.put(createAnalyzer(root, "demo.src.main.java.com.example.demo.generated.models"), "EJBGenerator");
-		analyzers.put(createAnalyzer(root, "demo.src.main.java.com.example.demo.user.repositories"), "EJBRepositoryGenerator");
-		analyzers.put(createAnalyzer(root, "demo.src.main.java.com.example.demo.generated.repositories"), "EJBRepositoryGenerator");
-		
 		try {
-			for (Map.Entry<ModelAnalyzer, String> analyzer: analyzers.entrySet()) {
-				analyzer.getKey().prepareModel();
-				GeneratorOptions go = ProjectOptions.getProjectOptions().getGeneratorOptions().get(analyzer.getValue());
-				EJBGenerator generator = new EJBGenerator(go);
+			for (GeneratorOptions generatorOptions : ProjectOptions.getProjectOptions().getGeneratorOptions().values()) {
+				EJBGenerator generator = new EJBGenerator(generatorOptions);
+				ModelAnalyzer analyzer = new ModelAnalyzer(root, generatorOptions.getFilePackage());
+
+				analyzer.prepareModel();
 				generator.generate();
 			}
 
@@ -63,11 +58,6 @@ class GenerateAction extends MDAction{
 		} catch (AnalyzeException e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());
 		} 			
-	}
-
-	private ModelAnalyzer createAnalyzer(Package root, String filePackage){
-		ModelAnalyzer analyzer = new ModelAnalyzer(root, filePackage);
-		return analyzer;
 	}
 	
 	private void exportToXml() {

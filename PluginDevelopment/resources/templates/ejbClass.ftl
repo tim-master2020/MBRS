@@ -10,24 +10,10 @@ ${class.visibility} class ${class.name} {
 <#list properties as property>
 <#--	<#if property.upper == 1 -->
 @Column
-<#if (property.columnName)?? || (property.precision)?? || (property.length)??  || (property.unique)?? || property.lower == 0>
-    (<#rt>
-    <#if (property.columnName)??>
-        <#lt>name = "${property.columnName}"<#rt>
-    </#if>
-    <#if (property.unique)??>
-        <#lt>
-        <#if (property.columnName)??>, </#if>
-        unique = ${property.unique?c}
-        <#rt>
-    </#if>
-    <#if property.lower == 0>
-        <#lt>
-        <#if (property.columnName)?? || (property.unique)??>, </#if>
-        nullable = true
-        <#rt>
-    </#if>
-    <#lt>)
+<#if (property.columnName)?? || (property.precision)?? || (property.length)??  || (property.unique)?? || property.lower == 0>(<#rt><#if (property.columnName)??>
+<#lt>name = "${property.columnName}"<#rt></#if>
+<#if (property.unique)??><#lt><#if (property.columnName)??>, </#if>unique = ${property.unique?c}<#rt></#if>
+<#if property.lower == 0><#lt><#if (property.columnName)?? || (property.unique)??>, </#if>nullable = true<#rt></#if><#lt>)
 </#if>
 ${property.visibility} ${property.type} ${property.name};
 </#list>
@@ -37,49 +23,22 @@ ${property.visibility} ${property.type} ${property.name};
     <#if linkedP.upper == -1 && linkedP.oppositeEnd == -1>
         @ManyToMany
     <#elseif linkedP.upper == -1 && linkedP.oppositeEnd == 1>
-        @OneToMany
+     @OneToMany
     <#elseif linkedP.upper == 1 && linkedP.oppositeEnd== -1>
-        @ManyToOne
+     @ManyToOne
     <#else>
-        @OneToOne
+     @OneToOne
     </#if>
-
     <#rt>
     <#lt>
-
-    <#if (linkedP.fetch)?? || (linkedP.cascade)?? || (linkedP.mappedBy)??>
-        (<#rt>
-            <#if (linkedP.cascade)??>
-                <#lt>cascade = CascadeType.${linkedP.cascade}<#rt>
-            </#if>
-            <#if (linkedP.fetch)??>
-                <#lt>
-                <#if (linkedP.cascade)??>, </#if>
-                fetch = FetchType.${linkedP.fetch}
-                <#rt>
-            </#if>
-            <#if (linkedP.mappedBy)??>
-                <#lt>
-                    <#if (linkedP.cascade)?? || (linkedP.fetch)??>, </#if>
-                    mappedBy = "${linkedP.mappedBy}"
-                <#rt>
-            </#if>
-        <#lt>)
-    </#if>
-
-    ${linkedP.visibility}
-    <#rt>
-
-    <#if linkedP.upper == -1> <#lt>Set<<#rt></#if>
-    <#lt>${linkedP.type?cap_first}
-    <#rt>
-    <#if linkedP.upper == -1>
-        <#lt>><#rt>
-    </#if>
-
-    <#lt>
-    ${linkedP.name};
-    <#if !linkedP?is_last>${'\n'}</#if>
+<#if (linkedP.fetch)?? || (linkedP.cascade)?? || (linkedP.mappedBy)??>(<#rt><#if (linkedP.cascade)??>
+<#lt>cascade = CascadeType.${linkedP.cascade}<#rt>
+</#if><#if (linkedP.fetch)??><#lt><#if (linkedP.cascade)??>, </#if>
+ fetch = FetchType.${linkedP.fetch}<#rt>
+</#if><#if (linkedP.mappedBy)??><#lt><#if (linkedP.cascade)?? || (linkedP.fetch)??>, </#if>
+mappedBy = "${linkedP.mappedBy}"<#rt></#if><#lt>)
+</#if>
+        ${linkedP.visibility} <#rt><#if linkedP.upper == -1> <#lt>Set<<#rt></#if><#lt>${linkedP.type?cap_first}<#rt><#if linkedP.upper == -1><#lt>><#rt></#if><#lt> ${linkedP.name};<#if !linkedP?is_last>${'\n'}</#if>
 </#list>
 
 <#--GENERATING EMPTY CONSTRUCTOR-->
