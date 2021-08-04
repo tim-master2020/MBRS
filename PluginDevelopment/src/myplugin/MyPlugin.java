@@ -34,7 +34,10 @@ public class MyPlugin extends com.nomagic.magicdraw.plugins.Plugin {
 		generateOptions("repository", "{0}Repository.java", "demo.src.main.java.com.example.demo.generated.repositories", "EJBBaseRepositoryGenerator");
 		generateOptions("controllerBase", "{0}ControllerBase.java", "demo.src.main.java.com.example.demo.user.controllers", "EJBControllerGenerator");
 		generateOptions("controller", "{0}Controller.java", "demo.src.main.java.com.example.demo.generated.controllers", "EJBBaseControllerGenerator");
-
+		generateOptions("serviceBase", "{0}BaseService.java", "demo.src.main.java.com.example.demo.user.services", "EJBServiceGenerator");
+		generateOptions("service", "{0}Service.java", "demo.src.main.java.com.example.demo.generated.services", "EJBBaseServiceGenerator");
+		generateOptions("iserviceBase", "I{0}BaseService.java", "demo.src.main.java.com.example.demo.user.interfaces", "EJBInterfaceGenerator");
+		generateOptions("iservice", "I{0}Service.java", "demo.src.main.java.com.example.demo.generated.interfaces", "EJBBaseInterfaceGenerator");
 		//generateOptions("dto", "{0}DTO.java", "demo.src.main.java.com.example.demo.generated.dto", "EJBDTOGenerator");
 	}
 
