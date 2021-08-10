@@ -29,28 +29,27 @@ ${class.visibility} class ${class.name}DTO {
         }
     </#list>
 
-    <#list class.FMLinkedProperty as linkedP>
+        <#list class.FMLinkedProperty as linkedP>
         <#if linkedP.upper == 1>
-        public <#rt>Long<#lt> get${linkedP.name?cap_first}(){
-           return this.${linkedP.name};
-        }
+            public <#rt>Long<#lt> get${linkedP.name?cap_first}(){
+            return this.${linkedP.name};
+            }
 
-        public void set${p.name?cap_first}(<#rt>Long<#lt> ${linkedP.name}){
+            public void set${linkedP.name?cap_first}(Long ${linkedP.name}){
             this.${linkedP.name} = ${linkedP.name};
-        }
+            }
         </#if>
 
         <#if linkedP.upper == -1>
         <#rt>public Set<Long> get${linkedP.name?cap_first}(){
             return this.${linkedP.name};
-        }
+            }
             <#lt>
 
-        public void set${p.name?cap_first}(Set<<#rt>Long<#lt>> ${p.name}){
-            this.${p.name} = ${p.name};
-         }
-        </#if>
-    </#list>
-
+            public void set${linkedP.name?cap_first}(<#rt>Set<Long><#lt> ${linkedP.name}){
+                this.${linkedP.name} = ${linkedP.name};
+                }
+                </#if>
+                </#list>
 
 }

@@ -38,7 +38,7 @@ public class MyPlugin extends com.nomagic.magicdraw.plugins.Plugin {
 		generateOptions("service", "{0}Service.java", "demo.src.main.java.com.example.demo.generated.services", "EJBBaseServiceGenerator");
 		generateOptions("iserviceBase", "I{0}BaseService.java", "demo.src.main.java.com.example.demo.user.interfaces", "EJBInterfaceGenerator");
 		generateOptions("iservice", "I{0}Service.java", "demo.src.main.java.com.example.demo.generated.interfaces", "EJBBaseInterfaceGenerator");
-		//generateOptions("dto", "{0}DTO.java", "demo.src.main.java.com.example.demo.generated.dto", "EJBDTOGenerator");
+		generateOptions("dto", "{0}DTO.java", "demo.src.main.java.com.example.demo.generated.dto", "EJBDTOGenerator");
 	}
 
 	private void generateOptions(String templateName, String outputFilename, String filePackage, String k) {
