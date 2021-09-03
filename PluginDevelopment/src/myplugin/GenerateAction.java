@@ -26,6 +26,7 @@ import myplugin.generator.EJBGenerator;
 import myplugin.generator.fmmodel.FMModel;
 import myplugin.generator.options.GeneratorOptions;
 import myplugin.generator.options.ProjectOptions;
+import myplugin.helpers.GeneratorMultipleHandler;
 
 /** Action that activate code generation */
 @SuppressWarnings("serial")
@@ -45,6 +46,13 @@ class GenerateAction extends MDAction{
 
 		try {
 			for (GeneratorOptions generatorOptions : ProjectOptions.getProjectOptions().getGeneratorOptions().values()) {
+				//if(generatorOptions.getTemplateName() == "page" || generatorOptions.getTemplateName() == "edit") {
+					//GeneratorMultipleHandler generator = new GeneratorMultipleHandler(generatorOptions);
+					//ModelAnalyzer analyzer = new ModelAnalyzer(root, generatorOptions.getFilePackage());
+					//analyzer.prepareModel();
+
+					//generator.generate();
+				//}
 				EJBGenerator generator = new EJBGenerator(generatorOptions);
 				ModelAnalyzer analyzer = new ModelAnalyzer(root, generatorOptions.getFilePackage());
 

@@ -48,6 +48,7 @@ public class EJBGenerator extends BasicGenerator {
 					context.put("class", cl);
 					context.put("properties", cl.getProperties());
 					context.put("importedPackages", cl.getImportedPackages());
+					context.put("classes", classes);
 					getTemplate().process(context, out);
 					out.flush();
 				}
