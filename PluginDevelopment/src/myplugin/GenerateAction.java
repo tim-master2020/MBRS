@@ -1,11 +1,11 @@
 package myplugin;
 
 import java.awt.event.ActionEvent;
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,6 +27,7 @@ import myplugin.generator.fmmodel.FMModel;
 import myplugin.generator.options.GeneratorOptions;
 import myplugin.generator.options.ProjectOptions;
 import myplugin.helpers.GeneratorMultipleHandler;
+import myplugin.utils.TreeCopyFileVisitor;
 
 /** Action that activate code generation */
 @SuppressWarnings("serial")
@@ -45,6 +46,11 @@ class GenerateAction extends MDAction{
 		if (root == null) return;
 
 		try {
+			Path path = Paths.get("C:\\Users\\Tamara\\Documents\\GitHub\\MBRS\\PluginDevelopment\\demo");
+			String fromDirectory = path.toAbsolutePath().toString().replace('\\', '/');
+			String toToDirectory = "c:/temp/demo";
+			copyDirectoryFileVisitor(fromDirectory, toToDirectory);
+
 			for (GeneratorOptions generatorOptions : ProjectOptions.getProjectOptions().getGeneratorOptions().values()) {
 				//if(generatorOptions.getTemplateName() == "page" || generatorOptions.getTemplateName() == "edit") {
 					//GeneratorMultipleHandler generator = new GeneratorMultipleHandler(generatorOptions);
@@ -63,7 +69,7 @@ class GenerateAction extends MDAction{
 			/**  @ToDo: Also call other generators */ 
 			JOptionPane.showMessageDialog(null, "Code is successfully generated!");
 			exportToXml();
-		} catch (AnalyzeException e) {
+		} catch (AnalyzeException | IOException e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());
 		} 			
 	}
@@ -91,6 +97,13 @@ class GenerateAction extends MDAction{
 				}		             
 			}
 		}	
-	}	  
+	}
+
+	public static void copyDirectoryFileVisitor(String source, String target)
+			throws IOException {
+
+		TreeCopyFileVisitor fileVisitor = new TreeCopyFileVisitor(source, target);
+		Files.walkFileTree(Paths.get(source), fileVisitor);
+	}
 
 }
