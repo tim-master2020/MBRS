@@ -1,0 +1,7 @@
+
+PluginDevelopment/dist/myplugin.jar
+PluginDevelopment/bin/myplugin/MyPlugin.class
+PluginDevelopment/bin/myplugin/helpers/TreeCopyFileVisitor.class
+PluginDevelopment/bin/myplugin/helpers/GeneratorMultipleHandler.class
+PluginDevelopment/bin/myplugin/generator/EJBGenerator.class
+PluginDevelopment/bin/myplugin/GenerateAction.class
