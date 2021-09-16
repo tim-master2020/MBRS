@@ -40,7 +40,6 @@ public class MyPlugin extends com.nomagic.magicdraw.plugins.Plugin {
 		generateOptions("iservice", "I{0}Service.java", "src.main.java.com.example.demo.generated.interfaces", "EJBBaseInterfaceGenerator");
 		generateOptionsFront("page", "{0}Page.js", "front.src", "EJBBasePageGenerator");
 		generateOptionsFront("App", "App.js", "front.src", "EJBBaseAppGenerator");
-		generateOptionsFront("Index", "index.js", "front.src", "EJBBaseIndexGenerator");
 		generateOptionsFront("table", "{0}Table.js", "front.src", "EJBBaseTablesGenerator");
 		generateOptionsFront("edit", "Edit{0}.js", "front.src", "EJBBaseEditGenerator");
 		generateOptionsFront("add", "Add{0}.js", "front.src", "EJBBaseAddGenerator");

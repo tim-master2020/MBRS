@@ -53,7 +53,7 @@ class GenerateAction extends MDAction{
 
 			Path pathFront = Paths.get("C:\\Users\\minam\\Desktop\\MBRS\\PluginDevelopment\\front");
 			String fromDirectoryFront = pathFront.toAbsolutePath().toString().replace('\\', '/');
-			String toToDirectoryFront = "c:/temp/front";
+			String toToDirectoryFront = "c:/temp/demo/front";
 			copyDirectoryFileVisitor(fromDirectoryFront, toToDirectoryFront);
 
 			for (GeneratorOptions generatorOptions : ProjectOptions.getProjectOptions().getGeneratorOptions().values()) {
