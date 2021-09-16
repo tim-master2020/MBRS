@@ -1,7 +1,7 @@
 package com.example.demo.generated.services;
 
 import com.example.demo.generated.models.*;
-import com.example.demo.generated.dtos.*;
+import com.example.demo.generated.dto.*;
 import com.example.demo.user.repositories.*;
 import com.example.demo.user.interfaces.I${class.name}Service;
 import java.util.*;
@@ -45,7 +45,7 @@ public class ${class.name}BaseService implements I${class.name}Service {
 	public ${class.name}DTO save(${class.name}DTO ${class.name?uncap_first}DTO) {
 		${class.name} ${class.name?uncap_first} = new ${class.name}(
 		<#list properties as property>
-		${class.name?uncap_first}DTO.get${property.name?cap_first}()
+		${class.name?uncap_first}DTO.get${property.name?cap_first}();
 		</#list>
 		<#list class.FMLinkedProperty as property>
 		, ${property.type?uncap_first}Repository.get${property.type}ById(${class.name?uncap_first}DTO.get${property.name?cap_first}())

@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-public class ${class.name}BaseController {
+public class ${class.name}ControllerBase {
 
 @Autowired
 private ${class.name}Service ${class.name?uncap_first}Service;
