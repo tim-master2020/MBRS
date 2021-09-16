@@ -1,4 +1,4 @@
-package myplugin.utils;
+package myplugin.helpers;
 
 import java.io.IOException;
 import java.nio.file.*;
