@@ -1,4 +1,6 @@
-package ${class.typePackage};
+package com.example.demo.generated.models;
+import com.example.demo.generated.dto.*;
+import javax.persistence.*;
 
 ${class.visibility} class ${class.name} {
 
