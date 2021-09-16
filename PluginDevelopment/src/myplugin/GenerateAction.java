@@ -27,7 +27,7 @@ import myplugin.generator.fmmodel.FMModel;
 import myplugin.generator.options.GeneratorOptions;
 import myplugin.generator.options.ProjectOptions;
 import myplugin.helpers.GeneratorMultipleHandler;
-import myplugin.utils.TreeCopyFileVisitor;
+import myplugin.helpers.TreeCopyFileVisitor;
 
 /** Action that activate code generation */
 @SuppressWarnings("serial")
@@ -48,8 +48,8 @@ class GenerateAction extends MDAction{
 		try {
 			Path path = Paths.get("C:\\Users\\minam\\Desktop\\MBRS\\PluginDevelopment\\demo");
 			String fromDirectory = path.toAbsolutePath().toString().replace('\\', '/');
-			String toToDirectory = "c:/temp/demo";
-			copyDirectoryFileVisitor(fromDirectory, toToDirectory);
+			String toDirectory = "c:/temp/demo/backend";
+			copyDirectoryFileVisitor(fromDirectory, toDirectory);
 
 			Path pathFront = Paths.get("C:\\Users\\minam\\Desktop\\MBRS\\PluginDevelopment\\front");
 			String fromDirectoryFront = pathFront.toAbsolutePath().toString().replace('\\', '/');
