@@ -30,14 +30,14 @@ public class MyPlugin extends com.nomagic.magicdraw.plugins.Plugin {
 		
 		//for test purpose only:
 		generateOptions("ejbclass", "{0}.java", "src.main.java.com.example.demo.generated.models", "EJBGenerator");
-		generateOptions("repositoryBase", "{0}BaseRepository.java", "src.main.java.com.example.demo.generated.repositories", "EJBRepositoryGenerator");
-		generateOptions("repository", "{0}Repository.java", "src.main.java.com.example.demo.user.repositories", "EJBBaseRepositoryGenerator");
-		generateOptions("controllerBase", "{0}ControllerBase.java", "src.main.java.com.example.demo.generated.controllers", "EJBControllerGenerator");
-		generateOptions("controller", "{0}Controller.java", "src.main.java.com.example.demo.user.controllers", "EJBBaseControllerGenerator");
-		generateOptions("serviceBase", "{0}BaseService.java", "src.main.java.com.example.demo.generated.services", "EJBServiceGenerator");
-		generateOptions("service", "{0}Service.java", "src.main.java.com.example.demo.user.services", "EJBBaseServiceGenerator");
-		generateOptions("iserviceBase", "I{0}BaseService.java", "src.main.java.com.example.demo.generated.interfaces", "EJBInterfaceGenerator");
-		generateOptions("iservice", "I{0}Service.java", "src.main.java.com.example.demo.user.interfaces", "EJBBaseInterfaceGenerator");
+		generateOptions("repositoryBase", "{0}BaseRepository.java", "src.main.java.com.example.demo.user.repositories", "EJBRepositoryGenerator");
+		generateOptions("repository", "{0}Repository.java", "src.main.java.com.example.demo.generated.repositories", "EJBBaseRepositoryGenerator");
+		generateOptions("controllerBase", "{0}ControllerBase.java", "demo.src.main.java.com.example.demo.user.controllers", "EJBControllerGenerator");
+		generateOptions("controller", "{0}Controller.java", "src.main.java.com.example.demo.generated.controllers", "EJBBaseControllerGenerator");
+		generateOptions("serviceBase", "{0}BaseService.java", "src.main.java.com.example.demo.user.services", "EJBServiceGenerator");
+		generateOptions("service", "{0}Service.java", "src.main.java.com.example.demo.generated.services", "EJBBaseServiceGenerator");
+		generateOptions("iserviceBase", "I{0}BaseService.java", "src.main.java.com.example.demo.user.interfaces", "EJBInterfaceGenerator");
+		generateOptions("iservice", "I{0}Service.java", "src.main.java.com.example.demo.generated.interfaces", "EJBBaseInterfaceGenerator");
 		generateOptionsFront("page", "{0}Page.js", "front.src", "EJBBasePageGenerator");
 		generateOptionsFront("App", "App.js", "front.src", "EJBBaseAppGenerator");
 		generateOptionsFront("Index", "index.js", "front.src", "EJBBaseIndexGenerator");
