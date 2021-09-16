@@ -26,6 +26,7 @@ import myplugin.generator.EJBGenerator;
 import myplugin.generator.fmmodel.FMModel;
 import myplugin.generator.options.GeneratorOptions;
 import myplugin.generator.options.ProjectOptions;
+import myplugin.helpers.GeneratorMultipleHandler;
 import myplugin.utils.TreeCopyFileVisitor;
 
 /** Action that activate code generation */
@@ -51,6 +52,13 @@ class GenerateAction extends MDAction{
 			copyDirectoryFileVisitor(fromDirectory, toToDirectory);
 
 			for (GeneratorOptions generatorOptions : ProjectOptions.getProjectOptions().getGeneratorOptions().values()) {
+				//if(generatorOptions.getTemplateName() == "page" || generatorOptions.getTemplateName() == "edit") {
+					//GeneratorMultipleHandler generator = new GeneratorMultipleHandler(generatorOptions);
+					//ModelAnalyzer analyzer = new ModelAnalyzer(root, generatorOptions.getFilePackage());
+					//analyzer.prepareModel();
+
+					//generator.generate();
+				//}
 				EJBGenerator generator = new EJBGenerator(generatorOptions);
 				ModelAnalyzer analyzer = new ModelAnalyzer(root, generatorOptions.getFilePackage());
 

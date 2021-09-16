@@ -38,6 +38,12 @@ public class MyPlugin extends com.nomagic.magicdraw.plugins.Plugin {
 		generateOptions("service", "{0}Service.java", "demo.src.main.java.com.example.demo.generated.services", "EJBBaseServiceGenerator");
 		generateOptions("iserviceBase", "I{0}BaseService.java", "demo.src.main.java.com.example.demo.user.interfaces", "EJBInterfaceGenerator");
 		generateOptions("iservice", "I{0}Service.java", "demo.src.main.java.com.example.demo.generated.interfaces", "EJBBaseInterfaceGenerator");
+		generateOptions("page", "{0}Page.js", "demo.src.main.java.com.example.demo.generated.front", "EJBBasePageGenerator");
+		generateOptions("App", "App.js", "demo.src.main.java.com.example.demo.generated.front", "EJBBaseMainGenerator");
+		generateOptions("table", "{0}Table.js", "demo.src.main.java.com.example.demo.generated.front", "EJBBaseTablesGenerator");
+		generateOptions("edit", "Edit{0}.js", "demo.src.main.java.com.example.demo.generated.front", "EJBBaseEditGenerator");
+		generateOptions("add", "Add{0}.js", "demo.src.main.java.com.example.demo.generated.front", "EJBBaseAddGenerator");
+		//generateOptions("dto", "{0}DTO.java", "demo.src.main.java.com.example.demo.generated.dto", "EJBDTOGenerator");
 		generateOptions("dto", "{0}DTO.java", "demo.src.main.java.com.example.demo.generated.dto", "EJBDTOGenerator");
 	}
 
