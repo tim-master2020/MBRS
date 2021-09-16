@@ -1,4 +1,4 @@
-package ${class.typePackage};
+package com.example.demo.generated.dto;
 
 ${class.visibility} class ${class.name}DTO {
 
