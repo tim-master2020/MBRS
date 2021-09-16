@@ -38,12 +38,12 @@ public class MyPlugin extends com.nomagic.magicdraw.plugins.Plugin {
 		generateOptions("service", "{0}Service.java", "src.main.java.com.example.demo.generated.services", "EJBBaseServiceGenerator");
 		generateOptions("iserviceBase", "I{0}BaseService.java", "src.main.java.com.example.demo.user.interfaces", "EJBInterfaceGenerator");
 		generateOptions("iservice", "I{0}Service.java", "src.main.java.com.example.demo.generated.interfaces", "EJBBaseInterfaceGenerator");
-		generateOptions("page", "{0}Page.js", "demo.front", "EJBBasePageGenerator");
-		generateOptions("App", "App.js", "demo.front", "EJBBaseAppGenerator");
-		generateOptions("Index", "index.js", "demo.front", "EJBBaseIndexGenerator");
-		generateOptions("table", "{0}Table.js", "demo.front", "EJBBaseTablesGenerator");
-		generateOptions("edit", "Edit{0}.js", "demo.front", "EJBBaseEditGenerator");
-		generateOptions("add", "Add{0}.js", "demo.front", "EJBBaseAddGenerator");
+		generateOptionsFront("page", "{0}Page.js", "front.src", "EJBBasePageGenerator");
+		generateOptionsFront("App", "App.js", "front.src", "EJBBaseAppGenerator");
+		generateOptionsFront("Index", "index.js", "front.src", "EJBBaseIndexGenerator");
+		generateOptionsFront("table", "{0}Table.js", "front.src", "EJBBaseTablesGenerator");
+		generateOptionsFront("edit", "Edit{0}.js", "front.src", "EJBBaseEditGenerator");
+		generateOptionsFront("add", "Add{0}.js", "front.src", "EJBBaseAddGenerator");
 		//generateOptions("dto", "{0}DTO.java", "demo.src.main.java.com.example.demo.generated.dto", "EJBDTOGenerator");
 		generateOptions("dto", "{0}DTO.java", "src.main.java.com.example.demo.generated.dto", "EJBDTOGenerator");
 	}
