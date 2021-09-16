@@ -46,10 +46,15 @@ class GenerateAction extends MDAction{
 		if (root == null) return;
 
 		try {
-			Path path = Paths.get("C:\\Users\\Tamara\\Documents\\GitHub\\MBRS\\PluginDevelopment\\demo");
+			Path path = Paths.get("C:\\Users\\minam\\Desktop\\MBRS\\PluginDevelopment\\demo");
 			String fromDirectory = path.toAbsolutePath().toString().replace('\\', '/');
 			String toToDirectory = "c:/temp/demo";
 			copyDirectoryFileVisitor(fromDirectory, toToDirectory);
+
+			Path pathFront = Paths.get("C:\\Users\\minam\\Desktop\\MBRS\\PluginDevelopment\\front");
+			String fromDirectoryFront = pathFront.toAbsolutePath().toString().replace('\\', '/');
+			String toToDirectoryFront = "c:/temp/front";
+			copyDirectoryFileVisitor(fromDirectoryFront, toToDirectoryFront);
 
 			for (GeneratorOptions generatorOptions : ProjectOptions.getProjectOptions().getGeneratorOptions().values()) {
 				//if(generatorOptions.getTemplateName() == "page" || generatorOptions.getTemplateName() == "edit") {
