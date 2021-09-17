@@ -1,7 +1,7 @@
 package com.example.demo.generated.interfaces;
 
 import java.util.*;
-import com.example.demo.generated.dto.${class.name}DTO;
+import com.example.demo.generated.dto.*;
 
 public interface I${class.name}BaseService {
 	List<${class.name}DTO> findAll();

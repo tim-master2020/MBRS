@@ -2,13 +2,13 @@ package com.example.demo.generated.controllers;
 
 import com.example.demo.user.services.${class.name}Service;
 import com.example.demo.generated.models.${class.name};
-import com.example.demo.generated.dtos.*;
+import com.example.demo.generated.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-public class ${class.name}ControllerBase {
+public class ${class.name}BaseController {
 
 @Autowired
 private ${class.name}Service ${class.name?uncap_first}Service;

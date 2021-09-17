@@ -22,13 +22,13 @@ public class ${class.name}BaseService implements I${class.name}Service {
 
 	<#list class.FMLinkedProperty as property>
 	@Autowired
-	private ${property.name?cap_first}Repository ${property.name?uncap_first}Repository;
+	private ${property.type?cap_first}Repository ${property.type?uncap_first}Repository;
 	</#list>
 	
 	@Override
 	public List<${class.name}DTO> findAll() {
 		List<${class.name}DTO> list = new ArrayList<>();
-        List<${class.name}> all = (ArrayList<${class.name}>)${class.name?uncap_first}Repository.findAll();
+        List<${class.name}> all = ${class.name?uncap_first}Repository.findAll();
         all.forEach(${class.name?uncap_first} -> {
             list.add(${class.name?uncap_first}.toDTO());
         });
@@ -37,19 +37,19 @@ public class ${class.name}BaseService implements I${class.name}Service {
 	
 	@Override
 	public ${class.name}DTO getOne(Long id) {
-		${class.name} ${class.name?uncap_first} = this.${class.name?uncap_first}Repository.findById(id);
+		Optional<${class.name}> ${class.name?uncap_first} = this.${class.name?uncap_first}Repository.findById(id);
 		return ${class.name?uncap_first}.get().toDTO();
 	}
 	
 	@Override
 	public ${class.name}DTO save(${class.name}DTO ${class.name?uncap_first}DTO) {
-		${class.name} ${class.name?uncap_first} = new ${class.name}(
+		${class.name} ${class.name?uncap_first} = new ${class.name}();
 		<#list properties as property>
-		${class.name?uncap_first}DTO.get${property.name?cap_first}();
+		${class.name?uncap_first}.set${property.name?cap_first}(${class.name?uncap_first}DTO.get${property.name?cap_first}());
 		</#list>
 		<#list class.FMLinkedProperty as property>
-		, ${property.type?uncap_first}Repository.get${property.type}ById(${class.name?uncap_first}DTO.get${property.name?cap_first}())
-		</#list>);
+		${class.name?uncap_first}.set${property.name?cap_first}(${property.type?uncap_first}Repository.get${property.type}ById(${class.name?uncap_first}DTO.get${property.name?cap_first}()));
+		</#list>
 		
 		this.${class.name?uncap_first}Repository.save(${class.name?uncap_first});
 		return ${class.name?uncap_first}.toDTO();
@@ -57,21 +57,21 @@ public class ${class.name}BaseService implements I${class.name}Service {
 	
 	@Override
 	public ${class.name}DTO update(Long id, ${class.name}DTO ${class.name?uncap_first}) {
-		${class.name}DTO ${class.name} = this.getOne(id);
+		${class.name}DTO new${class.name?uncap_first} = this.getOne(id);
 		
-		if(${class.name} == null) {
+		if(new${class.name?uncap_first} == null) {
 			return null;
 		}
 		<#list properties as property>
-  		${class.name}.set${property.name?cap_first}(${class.name?uncap_first}.get${property.name?cap_first}());
+		new${class.name?uncap_first}.set${property.name?cap_first}(${class.name?uncap_first}.get${property.name?cap_first}());
 		</#list>
-		return this.save(old${class.name});
+		return this.save(new${class.name?uncap_first});
 	}
 	
 	@Override
-	public void delete(Long id) {
-		${class.name}DTO ${class.name?uncap_first} = this.getOne(id);
+	public boolean delete(Long id) {
 		this.${class.name?uncap_first}Repository.deleteById(id);
+		return true;
 	}
 	
 	

@@ -103,14 +103,14 @@ public ${class.name}() {}
     this.id = id;
     }
 
-    public ${class.name}DTO toDTO{
-        ${class.name}DTO ${class.name?uncap_first}DTO =  new ${class.name}DTO();
+    public ${class.name}DTO toDTO() {
+        ${class.name}DTO ${class.name?uncap_first}DTO = new ${class.name}DTO();
         <#list properties as property>
-         ${class.name?uncap_first}.set${property.name?cap_first}(this.${property.name});
+         ${class.name?uncap_first}DTO.set${property.name?cap_first}(this.${property.name});
         </#list>
         <#list class.FMLinkedProperty as linkedP>
             <#if linkedP.upper == 1>
-        ${class.name?uncap_first}.set${linkedP.name?cap_first}(this.${linkedP.name}.getId());
+        ${class.name?uncap_first}DTO.set${linkedP.name?cap_first}(this.${linkedP.name}.getId());
             </#if>
             <#if linkedP.upper == -1>
                 Set<Long> ${linkedP.name}longList = new Set<Long>();

@@ -2,6 +2,7 @@ package com.example.demo.generated.dto;
 
 ${class.visibility} class ${class.name}DTO {
 
+    private Long id;
 <#list properties as property>
     <#if property.upper == 1>
     private ${property.type} ${property.name};
@@ -18,6 +19,14 @@ ${class.visibility} class ${class.name}DTO {
 
 
     public ${class.name}DTO(){}
+
+        public Long getId(){
+            return id;
+        }
+
+        public void setId(Long id){
+            this.id = id;
+        }
 
     <#list properties as p>
         public ${p.type} get${p.name?cap_first}(){
