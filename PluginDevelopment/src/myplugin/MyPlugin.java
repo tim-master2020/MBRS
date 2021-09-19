@@ -45,6 +45,7 @@ public class MyPlugin extends com.nomagic.magicdraw.plugins.Plugin {
 		generateOptionsFront("add", "Add{0}.js", "front.src", "EJBBaseAddGenerator");
 		//generateOptions("dto", "{0}DTO.java", "demo.src.main.java.com.example.demo.generated.dto", "EJBDTOGenerator");
 		generateOptions("dto", "{0}DTO.java", "src.main.java.com.example.demo.generated.dto", "EJBDTOGenerator");
+		generateOptions("enumeration", "{0}.java", "src.main.java.com.example.demo.generated.enum", "EnumGenerator");
 	}
 
 	private void generateOptions(String templateName, String outputFilename, String filePackage, String k) {

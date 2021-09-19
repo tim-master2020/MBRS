@@ -23,6 +23,7 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 import myplugin.analyzer.AnalyzeException;
 import myplugin.analyzer.ModelAnalyzer;
 import myplugin.generator.EJBGenerator;
+import myplugin.generator.EnumGenerator;
 import myplugin.generator.fmmodel.FMModel;
 import myplugin.generator.options.GeneratorOptions;
 import myplugin.generator.options.ProjectOptions;
@@ -46,12 +47,12 @@ class GenerateAction extends MDAction{
 		if (root == null) return;
 
 		try {
-			Path path = Paths.get("C:\\Users\\minam\\Desktop\\MBRS\\PluginDevelopment\\demo");
+			Path path = Paths.get("C:\\Users\\Acer\\MBRS projekat\\MBRS\\PluginDevelopment\\demo");
 			String fromDirectory = path.toAbsolutePath().toString().replace('\\', '/');
 			String toDirectory = "c:/temp/demo/backend";
 			copyDirectoryFileVisitor(fromDirectory, toDirectory);
 
-			Path pathFront = Paths.get("C:\\Users\\minam\\Desktop\\MBRS\\PluginDevelopment\\front");
+			Path pathFront = Paths.get("C:\\Users\\Acer\\MBRS projekat\\MBRS\\PluginDevelopment\\front");
 			String fromDirectoryFront = pathFront.toAbsolutePath().toString().replace('\\', '/');
 			String toToDirectoryFront = "c:/temp/demo/front";
 			copyDirectoryFileVisitor(fromDirectoryFront, toToDirectoryFront);
@@ -65,10 +66,12 @@ class GenerateAction extends MDAction{
 					//generator.generate();
 				//}
 				EJBGenerator generator = new EJBGenerator(generatorOptions);
+				EnumGenerator enumGenerator = new EnumGenerator(generatorOptions);
 				ModelAnalyzer analyzer = new ModelAnalyzer(root, generatorOptions.getFilePackage());
 
 				analyzer.prepareModel();
 				generator.generate();
+				enumGenerator.generate();
 			}
 
 			/**  @ToDo: Also call other generators */ 

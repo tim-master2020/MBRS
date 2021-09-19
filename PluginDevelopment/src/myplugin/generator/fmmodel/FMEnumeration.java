@@ -29,4 +29,11 @@ public class FMEnumeration extends FMType {
 		return Values.get(i);
 	}
 	
+	public ArrayList<String> getValues() {
+		return Values;
+	}
+
+	public void setValues(ArrayList<String> values) {
+		Values = values;
+	}
 }
