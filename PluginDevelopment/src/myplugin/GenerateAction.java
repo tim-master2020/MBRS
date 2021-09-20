@@ -65,13 +65,20 @@ class GenerateAction extends MDAction{
 
 					//generator.generate();
 				//}
-				EJBGenerator generator = new EJBGenerator(generatorOptions);
-				EnumGenerator enumGenerator = new EnumGenerator(generatorOptions);
-				ModelAnalyzer analyzer = new ModelAnalyzer(root, generatorOptions.getFilePackage());
+				if (!generatorOptions.getTemplateName().contains("enumeration")) {
+					EJBGenerator generator = new EJBGenerator(generatorOptions);
+					ModelAnalyzer analyzer = new ModelAnalyzer(root, generatorOptions.getFilePackage());
 
-				analyzer.prepareModel();
-				generator.generate();
-				enumGenerator.generate();
+					analyzer.prepareModel();
+					generator.generate();
+				} else {
+					EnumGenerator enumGenerator = new EnumGenerator(generatorOptions);
+					ModelAnalyzer analyzer = new ModelAnalyzer(root, generatorOptions.getFilePackage());
+
+					analyzer.prepareModel();
+					enumGenerator.generate();
+				}
+				
 			}
 
 			/**  @ToDo: Also call other generators */ 
