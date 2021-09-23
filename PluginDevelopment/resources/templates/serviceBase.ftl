@@ -3,6 +3,7 @@ package com.example.demo.generated.services;
 import com.example.demo.generated.models.*;
 import com.example.demo.generated.dto.*;
 import com.example.demo.user.repositories.*;
+import com.example.demo.generated.enumeration.*;
 import com.example.demo.user.interfaces.I${class.name}Service;
 import java.util.*;
 

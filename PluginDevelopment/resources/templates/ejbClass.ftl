@@ -1,6 +1,7 @@
 package com.example.demo.generated.models;
 import com.example.demo.generated.dto.*;
 import javax.persistence.*;
+import com.example.demo.generated.enumeration.*;
 
 ${class.visibility} class ${class.name} {
 

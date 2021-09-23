@@ -1,5 +1,7 @@
 package com.example.demo.generated.dto;
 
+import com.example.demo.generated.enumeration.*;
+
 ${class.visibility} class ${class.name}DTO {
 
     private Long id;
