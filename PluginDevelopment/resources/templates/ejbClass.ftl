@@ -3,6 +3,8 @@ import com.example.demo.generated.dto.*;
 import javax.persistence.*;
 import com.example.demo.generated.enumeration.*;
 
+@Entity
+@Table
 ${class.visibility} class ${class.name} {
 
     @Id
@@ -106,6 +108,7 @@ public ${class.name}() {}
 
     public ${class.name}DTO toDTO() {
         ${class.name}DTO ${class.name?uncap_first}DTO = new ${class.name}DTO();
+        ${class.name?uncap_first}DTO.setId(this.id);
         <#list properties as property>
          ${class.name?uncap_first}DTO.set${property.name?cap_first}(this.${property.name});
         </#list>

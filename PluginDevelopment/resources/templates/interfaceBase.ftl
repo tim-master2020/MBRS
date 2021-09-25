@@ -3,7 +3,7 @@ package com.example.demo.generated.interfaces;
 import java.util.*;
 import com.example.demo.generated.dto.*;
 
-public interface I${class.name}BaseService {
+public interface ${class.name}BaseInterface {
 	List<${class.name}DTO> findAll();
     ${class.name}DTO getOne(Long id);
     ${class.name}DTO save(${class.name}DTO ${class.name?uncap_first});

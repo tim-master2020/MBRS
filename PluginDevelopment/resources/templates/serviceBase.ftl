@@ -4,7 +4,7 @@ import com.example.demo.generated.models.*;
 import com.example.demo.generated.dto.*;
 import com.example.demo.user.repositories.*;
 import com.example.demo.generated.enumeration.*;
-import com.example.demo.user.interfaces.I${class.name}Service;
+import com.example.demo.generated.interfaces.*;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
  * Changes to this file may cause incorrect behavior and will be lost if the code is regenerated.
  */
 @Service
-public class ${class.name}BaseService implements I${class.name}Service {
+public class ${class.name}BaseService implements ${class.name}BaseInterface {
 	
 	@Autowired
 	private ${class.name}Repository ${class.name?uncap_first}Repository;
@@ -58,15 +58,15 @@ public class ${class.name}BaseService implements I${class.name}Service {
 	
 	@Override
 	public ${class.name}DTO update(Long id, ${class.name}DTO ${class.name?uncap_first}) {
-		${class.name}DTO new${class.name?uncap_first} = this.getOne(id);
-		
-		if(new${class.name?uncap_first} == null) {
+		${class.name} new${class.name?uncap_first}Model = ${class.name?uncap_first}Repository.getOne(id);
+		if(new${class.name?uncap_first}Model == null) {
 			return null;
 		}
 		<#list properties as property>
-		new${class.name?uncap_first}.set${property.name?cap_first}(${class.name?uncap_first}.get${property.name?cap_first}());
+		new${class.name?uncap_first}Model.set${property.name?cap_first}(${class.name?uncap_first}.get${property.name?cap_first}());
 		</#list>
-		return this.save(new${class.name?uncap_first});
+		${class.name?uncap_first}Repository.save(new${class.name?uncap_first}Model);
+		return new${class.name?uncap_first}Model.toDTO();
 	}
 	
 	@Override
