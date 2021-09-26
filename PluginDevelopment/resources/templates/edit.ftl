@@ -35,7 +35,7 @@ class Edit${class.name} extends React.Component {
 
         this.state.name = this.props.content.name;
 
-        axios.post("http://localhost:8081/api/${class.name?uncap_first}/update",this.state).then(
+        axios.put("http://localhost:8081/api/${class.name}",this.state).then(
         (resp) => this.onSuccessHandler(resp),
         (resp) => this.onErrorHandler(resp)
         );
