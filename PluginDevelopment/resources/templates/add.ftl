@@ -41,12 +41,12 @@ class Add${class.name} extends React.Component {
     componentDidMount() {
         <#list class.FMLinkedProperty as linkedP>
             <#if linkedP.upper == 1>
-                axios.get('http://localhost:8081/api/${linkedP.name?uncap_first}/${linkedP.name?uncap_first}s', options).then(
+                axios.get('http://localhost:8081/api/${linkedP.name}').then(
                 (resp) => this.onSuccessHandler${linkedP.name?cap_first}s(resp),
                 (resp) => this.onErrorHandler${linkedP.name?cap_first}s(resp),
                 );
             <#else>
-                axios.get('http://localhost:8081/api/${linkedP.name?uncap_first}/${linkedP.name?uncap_first}s', options).then(
+                axios.get('http://localhost:8081/api/${linkedP.name}').then(
                     (resp) => this.onSuccessHandler${linkedP.name?cap_first}s(resp),
                     (resp) => this.onErrorHandler${linkedP.name?cap_first}s(resp),
                 );
@@ -61,7 +61,7 @@ class Add${class.name} extends React.Component {
                     ${linkedP.name?uncap_first}s: resp.data,
                     });
             }
-            onErrorHandler${linkedP.name?cap_first}(response) {
+            onErrorHandler${linkedP.name?cap_first}s(response) {
                 alert("Error response: Uncovered case");
             }
         <#else>
@@ -70,7 +70,7 @@ class Add${class.name} extends React.Component {
                     ${linkedP.name?uncap_first}s: resp.data,
                     });
             }
-            onErrorHandler${linkedP.name?cap_first}(response) {
+            onErrorHandler${linkedP.name?cap_first}s(response) {
                 alert("Error response: Uncovered case");
             }
         </#if>
@@ -79,7 +79,7 @@ class Add${class.name} extends React.Component {
 
     add${class.name}(event) {
         event.preventDefault();
-        axios.post("http://localhost:8081/api/${class.name?uncap_first}/save", this.state).then(
+        axios.post("http://localhost:8081/api/${class.name}", this.state).then(
             (resp) => this.onSuccessHandler(resp),
             (resp) => this.onErrorHandler(resp)
             );
