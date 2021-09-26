@@ -15,7 +15,7 @@ class ${class.name}Page extends React.Component {
         this.add${class.name} = this.add${class.name}.bind(this);
         this.handler = this.handler.bind(this);
 
-        axios.get("http://localhost:8081/api/${class.name}/all").then(
+        axios.get("http://localhost:8081/api/${class.name}").then(
             (resp) => this.onSuccessHandler(resp),
             (resp) => this.onErrorHandler(resp)
             );
