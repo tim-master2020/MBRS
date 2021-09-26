@@ -12,7 +12,7 @@ class ${class.name}Table extends React.Component{
     }
 
     delete${class.name}(${class.name?uncap_first}) {
-        axios.post("http://localhost:8081/api/${class.name?uncap_first}/delete${class.name}", ${class.name?uncap_first}).then(
+        axios.delete("http://localhost:8081/api/${class.name}", ${class.name?uncap_first}).then(
             (resp) => this.onSuccessHandler(resp),
             (resp) => this.onErrorHandler(resp)
         );
@@ -45,7 +45,7 @@ class ${class.name}Table extends React.Component{
             </#list>}); }
         }
 
-        const ${class.name?uncap_first}s = [
+        const ${class.name?uncap_first}sColumn = [
             <#list properties as property>
                 <#if property.upper == 1>
                     {
@@ -65,11 +65,10 @@ class ${class.name}Table extends React.Component{
                 Cell: ({ original }) => (<Edit${class.name?cap_first} content={original}/>)
             }
         ]
-        }
 
         return (
             <div>
-                <ReactTable data={${class.name?uncap_first}s}
+                <ReactTable data={${class.name?uncap_first}sColumn}
                             minRows={0}
                             showPagination={false} />
             </div>
