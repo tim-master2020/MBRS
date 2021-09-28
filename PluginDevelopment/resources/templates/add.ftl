@@ -32,6 +32,9 @@ class Add${class.name} extends React.Component {
                 ${linkedP.name?uncap_first}s: [],
                 ${linkedP.name?uncap_first}: "",
         </#list>
+        <#list properties as prop>
+            ${prop.name?uncap_first}s: [],
+        </#list>
         };
     }
 
@@ -49,6 +52,7 @@ class Add${class.name} extends React.Component {
                 );
             </#if>
         </#list>
+
     }
 
     <#list class.FMLinkedProperty as linkedP>
@@ -165,7 +169,6 @@ class Add${class.name} extends React.Component {
                                            onChange={this.handleChange}
                                            placeholder="Enter ${property.name}"
                                     />
-                                    <br/>
                                 </#if>
                             </#list>
                             <#list class.FMLinkedProperty as linkedP>

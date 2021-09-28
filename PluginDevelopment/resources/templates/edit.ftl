@@ -19,18 +19,61 @@ class Edit${class.name} extends React.Component {
         this.SendUpdateRequest = this.SendUpdateRequest.bind(this);
 
         this.state = {
-            show: false,
-            id: this.props.id,
-            <#list properties as property>
-                <#if property.upper == 1 && property.type == "String">
-                    ${property.name}: this.props.content.${property.name},
-                </#if>
-                <#if property.upper == 1 && property.type == "Long">
-                    ${property.name}: 0,
-                </#if>
-            </#list>
+        show: false,
+        <#list properties as property>
+            <#if property.upper == 1 && property.type == "String">
+                ${property.name}: "",
+            </#if>
+            <#if property.upper == 1 && property.type == "Long">
+                ${property.name}: 0,
+            </#if>
+        </#list>
+        <#list class.FMLinkedProperty as linkedP>
+            ${linkedP.name?uncap_first}s: [],
+            ${linkedP.name?uncap_first} : this.props.content.${linkedP.name},
+        </#list>
         };
-    }
+        }
+
+        componentDidMount() {
+        <#list class.FMLinkedProperty as linkedP>
+            <#if linkedP.upper == 1>
+                axios.get('http://localhost:8081/api/${linkedP.name?cap_first}').then(
+                (resp) => this.onSuccessHandler${linkedP.name?cap_first}s(resp),
+                (resp) => this.onErrorHandler${linkedP.name?cap_first}s(resp),
+                );
+            <#else>
+                axios.get('http://localhost:8081/api/${linkedP.name?cap_first}').then(
+                (resp) => this.onSuccessHandler${linkedP.name?cap_first}s(resp),
+                (resp) => this.onErrorHandler${linkedP.name?cap_first}s(resp),
+                );
+            </#if>
+        </#list>
+        }
+
+    <#list class.FMLinkedProperty as linkedP>
+        <#if linkedP.upper == 1>
+            onSuccessHandler${linkedP.name?cap_first}s(resp) {
+            this.setState({
+            ${linkedP.name?uncap_first}s: resp.data,
+            });
+            }
+            onErrorHandler${linkedP.name?cap_first}s(response) {
+            alert("Error response: Uncovered case");
+            }
+        <#else>
+            onSuccessHandler${linkedP.name?cap_first}s(resp) {
+            this.setState({
+            ${linkedP.name?uncap_first}s: resp.data,
+            });
+            }
+            onErrorHandler${linkedP.name?cap_first}s(response) {
+            alert("Error response: Uncovered case");
+            }
+        </#if>
+    </#list>
+
+
 
     SendUpdateRequest = event => {
         event.preventDefault();

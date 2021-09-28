@@ -35,17 +35,24 @@ class ${class.name}Table extends React.Component{
             <#list properties as property>
                 <#if property.upper == 1>
                     const ${property.name?uncap_first} = this.props.content[i].${property.name?uncap_first};
-                    const id = this.props.content[i].id;
                 </#if>
             </#list>
+            <#list class.FMLinkedProperty as p>
+                    const ${p.name?uncap_first} = this.props.content[i].${p.name?uncap_first};
+            </#list>
+                    const id = this.props.content[i].id;
 
             { ${class.name?uncap_first}s.push({
             <#list properties as property>
                 <#if property.upper == 1>
                     ${property.name?uncap_first}: ${property.name?uncap_first},
-                    id: id
                 </#if>
-            </#list>}); }
+            </#list>
+            <#list class.FMLinkedProperty as p>
+                 ${p.name?uncap_first} : this.props.content[i].${p.name?uncap_first},
+            </#list>
+                    id: id,
+        }); }
         }
 
         const ${class.name?uncap_first}sColumn = [
