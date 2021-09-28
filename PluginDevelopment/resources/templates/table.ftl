@@ -12,7 +12,8 @@ class ${class.name}Table extends React.Component{
     }
 
     delete${class.name}(${class.name?uncap_first}) {
-        axios.delete("http://localhost:8081/api/${class.name}", ${class.name?uncap_first}).then(
+        const item = ${class.name?uncap_first};
+        axios.delete(`http://localhost:8081/api/${class.name}/${r"${item.id}"}`).then(
             (resp) => this.onSuccessHandler(resp),
             (resp) => this.onErrorHandler(resp)
         );
@@ -33,14 +34,16 @@ class ${class.name}Table extends React.Component{
         for (var i = 0; i < this.props.content.length; i++) {
             <#list properties as property>
                 <#if property.upper == 1>
-                    const ${property.name} = this.props.content[i].${property.name};
+                    const ${property.name?uncap_first} = this.props.content[i].${property.name?uncap_first};
+                    const id = this.props.content[i].id;
                 </#if>
             </#list>
 
             { ${class.name?uncap_first}s.push({
             <#list properties as property>
                 <#if property.upper == 1>
-                    ${property.name}: ${property.name},
+                    ${property.name?uncap_first}: ${property.name?uncap_first},
+                    id: id
                 </#if>
             </#list>}); }
         }
@@ -55,12 +58,12 @@ class ${class.name}Table extends React.Component{
                 </#if>
             </#list>
             {
-                accessor: "name",
+                accessor: "id",
                 Header: "Delete",
                 Cell: ({ row }) => (<Button className="delete${class.name?cap_first}" variant="outline-danger" onClick={this.delete${class.name?cap_first}.bind(this, row)} >Delete</Button>)
             },
             {
-                accessor: "name",
+                accessor: "id",
                 Header: "Edit",
                 Cell: ({ original }) => (<Edit${class.name?cap_first} content={original}/>)
             }
@@ -68,7 +71,8 @@ class ${class.name}Table extends React.Component{
 
         return (
             <div>
-                <ReactTable data={${class.name?uncap_first}sColumn}
+                <ReactTable data={${class.name?uncap_first}s}
+                            columns={${class.name?uncap_first}sColumn}
                             minRows={0}
                             showPagination={false} />
             </div>

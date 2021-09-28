@@ -3,6 +3,7 @@ import { Modal, Button } from "react-bootstrap";
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import axios from 'axios'
+import Select from 'react-select';
 
 const TypeCreatedAlert = withReactContent(Swal)
 
@@ -19,9 +20,10 @@ class Edit${class.name} extends React.Component {
 
         this.state = {
             show: false,
+            id: this.props.id,
             <#list properties as property>
                 <#if property.upper == 1 && property.type == "String">
-                    ${property.name}: "",
+                    ${property.name}: this.props.content.${property.name},
                 </#if>
                 <#if property.upper == 1 && property.type == "Long">
                     ${property.name}: 0,
@@ -89,7 +91,7 @@ class Edit${class.name} extends React.Component {
                     aria-labelledby="contained-modal-title-vcenter"
                     centered = "true"
             >
-                <Modal.Header closeButton>
+                <Modal.Header>
                     <Modal.Title id="contained-modal-title-vcenter">
                         Edit ${class.name}
                     </Modal.Title>
@@ -99,12 +101,13 @@ class Edit${class.name} extends React.Component {
                         <div className="form-group">
                             <#list properties as property>
                                 <#if property.upper == 1 && property.type == "String">
-                                    <p>${property.name}: {this.props.content.${property.name}}</p>
+                                    <p>${property.name}: </p>
                                     <br/>
                                     <input type="text"
                                            className="form-control form-control-sm"
                                            id="${property.name}"
                                            name="${property.name}"
+                                           defaultValue={this.props.content.${property.name}}
                                            onChange={this.handleChange}
                                            placeholder={this.props.content.${property.name}}
                                            required
@@ -112,11 +115,12 @@ class Edit${class.name} extends React.Component {
                                     <br/>
                                 </#if>
                                 <#if property.upper == 1 && property.type == "Long">
-                                    <p>${property.name}: {this.props.content.${property.name}}</p>
+                                    <p>${property.name}: </p>
                                     <br/>
                                     <input type="number"
                                            className="form-control form-control-sm"
                                            id="${property.name}"
+                                           defaultValue={this.props.content.${property.name}}
                                            name="${property.name}"
                                            onChange={this.handleChange}
                                            placeholder={this.props.content.${property.name}}
@@ -124,6 +128,15 @@ class Edit${class.name} extends React.Component {
                                     />
                                     <br/>
                                 </#if>
+                                <br/>
+                                <#list class.FMLinkedProperty as linkedP>
+                                    <label htmlFor="${linkedP.name}">${linkedP.name}</label>
+                                    <Select className="selectoptions" multi={true}
+                                            onChange={entry => { this.setState({ ${linkedP.name}: entry.value});}}
+                                    value={this.state.${linkedP.name}.label}
+                                    options={this.state.${linkedP.name}s.map((type, i) => {return { value: type.id, label: type.name };})}
+                                    />
+                                </#list>
                             </#list>
                         </div>
                         <hr/>

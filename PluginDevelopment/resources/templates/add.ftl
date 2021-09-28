@@ -2,6 +2,7 @@ import React from 'react';
 import { Modal, Button } from "react-bootstrap";
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
+import Select from 'react-select';
 import axios from 'axios'
 
 const TypeCreatedAlert = withReactContent(Swal)
@@ -28,12 +29,8 @@ class Add${class.name} extends React.Component {
             </#if>
         </#list>
         <#list class.FMLinkedProperty as linkedP>
-            <#if linkedP.upper == 1>
-                ${linkedP.name}: 0,
-            <#else>
                 ${linkedP.name?uncap_first}s: [],
-                ${linkedP.name?uncap_first}name: "",
-            </#if>
+                ${linkedP.name?uncap_first}: "",
         </#list>
         };
     }
@@ -41,12 +38,12 @@ class Add${class.name} extends React.Component {
     componentDidMount() {
         <#list class.FMLinkedProperty as linkedP>
             <#if linkedP.upper == 1>
-                axios.get('http://localhost:8081/api/${linkedP.name}').then(
+                axios.get('http://localhost:8081/api/${linkedP.name?cap_first}').then(
                 (resp) => this.onSuccessHandler${linkedP.name?cap_first}s(resp),
                 (resp) => this.onErrorHandler${linkedP.name?cap_first}s(resp),
                 );
             <#else>
-                axios.get('http://localhost:8081/api/${linkedP.name}').then(
+                axios.get('http://localhost:8081/api/${linkedP.name?cap_first}').then(
                     (resp) => this.onSuccessHandler${linkedP.name?cap_first}s(resp),
                     (resp) => this.onErrorHandler${linkedP.name?cap_first}s(resp),
                 );
@@ -56,7 +53,7 @@ class Add${class.name} extends React.Component {
 
     <#list class.FMLinkedProperty as linkedP>
         <#if linkedP.upper == 1>
-            onSuccessHandler${linkedP.name?cap_first}(resp) {
+            onSuccessHandler${linkedP.name?cap_first}s(resp) {
                     this.setState({
                     ${linkedP.name?uncap_first}s: resp.data,
                     });
@@ -65,7 +62,7 @@ class Add${class.name} extends React.Component {
                 alert("Error response: Uncovered case");
             }
         <#else>
-            onSuccessHandler${linkedP.name?cap_first}(resp) {
+            onSuccessHandler${linkedP.name?cap_first}s(resp) {
                     this.setState({
                     ${linkedP.name?uncap_first}s: resp.data,
                     });
@@ -139,7 +136,7 @@ class Add${class.name} extends React.Component {
                     aria-labelledby="contained-modal-title-vcenter"
                     centered = "true"
             >
-                <Modal.Header closeButton>
+                <Modal.Header>
                     <Modal.Title id="contained-modal-title-vcenter">
                         Add ${class.name}
                     </Modal.Title>
@@ -172,16 +169,12 @@ class Add${class.name} extends React.Component {
                                 </#if>
                             </#list>
                             <#list class.FMLinkedProperty as linkedP>
-                                <#if linkedP.upper == 1>
-                                    ${linkedP.name}: 0,
-                                <#else>
                                     <label htmlFor="${linkedP.name}">${linkedP.name}</label>
                                     <Select className="selectoptions" multi={true}
-                                    onChange={entry => { this.setState({ ${linkedP.name}name: entry.label});}}
-                                    value={this.state.${linkedP.name}name.label}
-                                    options={this.state.${linkedP.name}s.map((type, i) => {return { value: type.name, label: type.name };})}
+                                    onChange={entry => { this.setState({ ${linkedP.name}: entry.value});}}
+                                    value={this.state.${linkedP.name}.label}
+                                    options={this.state.${linkedP.name}s.map((type, i) => {return { value: type.id, label: type.name };})}
                                     />
-                                </#if>
                             </#list>
                         </div>
                         <hr/>

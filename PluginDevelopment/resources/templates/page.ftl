@@ -2,7 +2,6 @@ import React from 'react';
 import ${class.name}Table from './${class.name}Table'
 import Add${class.name} from './Add${class.name}'
 import axios from 'axios';
-import '../css/Add${class.name}.css'
 
 class ${class.name}Page extends React.Component {
 
