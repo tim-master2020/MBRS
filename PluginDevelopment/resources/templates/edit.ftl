@@ -157,7 +157,7 @@ class Edit${class.name} extends React.Component {
                                     />
                                     <br/>
                                 </#if>
-                                <#if property.upper == 1 && property.type == "Long">
+                                <#if property.upper == 1 && (property.type == "Long" || property.type == "Long")>
                                     <p>${property.name}: </p>
                                     <br/>
                                     <input type="number"
