@@ -65,6 +65,11 @@ public class ${class.name}BaseService implements ${class.name}BaseInterface {
 		<#list properties as property>
 		new${class.name?uncap_first}Model.set${property.name?cap_first}(${class.name?uncap_first}.get${property.name?cap_first}());
 		</#list>
+
+		<#list class.FMLinkedProperty as fmProp>
+			new${class.name?uncap_first}Model.set${fmProp.name?cap_first}(${fmProp.name?uncap_first}Repository.get${fmProp.name?cap_first}ById(${class.name?uncap_first}.get${fmProp.name?cap_first}()));
+		</#list>
+
 		${class.name?uncap_first}Repository.save(new${class.name?uncap_first}Model);
 		return new${class.name?uncap_first}Model.toDTO();
 	}

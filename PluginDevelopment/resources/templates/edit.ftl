@@ -20,12 +20,13 @@ class Edit${class.name} extends React.Component {
 
         this.state = {
         show: false,
+        id : this.props.content.id,
         <#list properties as property>
             <#if property.upper == 1 && property.type == "String">
-                ${property.name}: "",
+                ${property.name}: this.props.content.${property.name},
             </#if>
-            <#if property.upper == 1 && property.type == "Long">
-                ${property.name}: 0,
+            <#if property.upper == 1 && (property.type == "Long" ||property.type == "long")>
+                ${property.name}: this.props.content.${property.name},
             </#if>
         </#list>
         <#list class.FMLinkedProperty as linkedP>
@@ -78,8 +79,6 @@ class Edit${class.name} extends React.Component {
     SendUpdateRequest = event => {
         event.preventDefault();
 
-        this.state.name = this.props.content.name;
-
         axios.put("http://localhost:8081/api/${class.name}",this.state).then(
         (resp) => this.onSuccessHandler(resp),
         (resp) => this.onErrorHandler(resp)
@@ -122,6 +121,9 @@ class Edit${class.name} extends React.Component {
     }
 
     render() {
+        <#list class.FMLinkedProperty as linkedP>
+            const  ${linkedP.name?uncap_first}Value = this.state.${linkedP.name?uncap_first}s.find((item)=>{return item.id === this.state.${linkedP.name?uncap_first}});
+        </#list>
         return (
         <div>
             <Button variant="outline-primary" id="examedit" onClick={this.handleShow}>
@@ -157,7 +159,7 @@ class Edit${class.name} extends React.Component {
                                     />
                                     <br/>
                                 </#if>
-                                <#if property.upper == 1 && (property.type == "Long" || property.type == "Long")>
+                                <#if property.upper == 1 && (property.type == "Long" || property.type == "long")>
                                     <p>${property.name}: </p>
                                     <br/>
                                     <input type="number"
@@ -171,16 +173,16 @@ class Edit${class.name} extends React.Component {
                                     />
                                     <br/>
                                 </#if>
+                            </#list>
                                 <br/>
                                 <#list class.FMLinkedProperty as linkedP>
                                     <label htmlFor="${linkedP.name}">${linkedP.name}</label>
                                     <Select className="selectoptions" multi={true}
                                             onChange={entry => { this.setState({ ${linkedP.name}: entry.value});}}
-                                    value={this.state.${linkedP.name}.label}
+                                    value={${linkedP.name?uncap_first}Value ? {label:${linkedP.name?uncap_first}Value.name,value:${linkedP.name?uncap_first}Value.id} : {}}
                                     options={this.state.${linkedP.name}s.map((type, i) => {return { value: type.id, label: type.name };})}
                                     />
                                 </#list>
-                            </#list>
                         </div>
                         <hr/>
                         <Button className="dugmad" variant="secondary" className="dugme2dr" onClick={this.handleClose}>Close</Button>

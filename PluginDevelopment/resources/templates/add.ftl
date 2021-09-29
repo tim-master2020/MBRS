@@ -24,7 +24,7 @@ class Add${class.name} extends React.Component {
             <#if property.upper == 1 && property.type == "String">
                 ${property.name}: "",
             </#if>
-            <#if property.upper == 1 && property.type == "Long">
+            <#if property.upper == 1 && (property.type == "Long" ||property.type == "long")>
                 ${property.name}: 0,
             </#if>
         </#list>
@@ -160,7 +160,7 @@ class Add${class.name} extends React.Component {
                                     />
                                     <br/>
                                 </#if>
-                                <#if property.upper == 1 && property.type == "Long">
+                                <#if property.upper == 1 && (property.type == "Long" || property.type == "long")>
                                     <label htmlFor="${property.name}">${property.name}</label>
                                     <input type="number"
                                            className="form-control form-control-sm"
